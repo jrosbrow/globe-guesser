@@ -1,0 +1,300 @@
+:root {
+  --bg: #0f1115;
+  --panel: #161922;
+  --ink: #e8eaed;
+  --muted: #8a90a0;
+  --line: #2a2f3b;
+  --ocean: #11151d;
+  --land: #1f2530;
+  --land-stroke: #2c3340;
+  --graticule: #1a1f29;
+  --accent: #6ee7b7;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --pin-target: #6ee7b7;
+  --pin-guess: #f59e0b;
+  --link: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  height: 100dvh;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+
+.topbar h1 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.difficulty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+select,
+button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+select:hover,
+button:hover {
+  border-color: #3a4150;
+}
+
+button.ghost {
+  background: transparent;
+}
+
+.stage {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.prompt {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  background: rgba(22, 25, 34, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  z-index: 2;
+}
+
+.prompt-label {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: var(--muted);
+}
+
+.prompt-city {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.prompt-hint {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.globe-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#globe {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+#globe.dragging {
+  cursor: grabbing;
+}
+
+#globe.guessing {
+  cursor: crosshair;
+}
+
+.sphere {
+  fill: var(--ocean);
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.land {
+  fill: var(--land);
+  stroke: var(--land-stroke);
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+}
+
+.graticule {
+  fill: none;
+  stroke: var(--graticule);
+  stroke-width: 0.5;
+}
+
+.guess-line {
+  fill: none;
+  stroke: var(--pin-guess);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.9;
+}
+
+.pin {
+  stroke: rgba(0, 0, 0, 0.4);
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.pin.target {
+  fill: var(--pin-target);
+}
+
+.pin.guess {
+  fill: var(--pin-guess);
+}
+
+.pin-label {
+  fill: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.7);
+  stroke-width: 3px;
+  pointer-events: none;
+}
+
+.result {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22, 25, 34, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 260px;
+  z-index: 2;
+}
+
+.result[hidden] {
+  display: none;
+}
+
+.result-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.result-score {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.result-score-label {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+#result button {
+  background: var(--accent);
+  color: #06140d;
+  border: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+#result button:hover {
+  filter: brightness(1.08);
+}
+
+.hint {
+  flex: 0 0 auto;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 10px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .controls {
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .difficulty {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .difficulty span {
+    display: none;
+  }
+  .difficulty select {
+    width: 100%;
+  }
+  .prompt-city {
+    font-size: 15px;
+  }
+}

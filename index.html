@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Globe Guesser</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Globe Guesser</h1>
+      <div class="controls">
+        <label class="difficulty">
+          <span>Difficulty</span>
+          <select id="difficulty">
+            <option value="easy">Easy · top 100 cities</option>
+            <option value="medium" selected>Medium · top 400</option>
+            <option value="hard">Hard · top 1000</option>
+          </select>
+        </label>
+        <button id="new-round" class="ghost" type="button">New city</button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <div class="prompt" id="prompt">
+        <span class="prompt-label">Find</span>
+        <span class="prompt-city" id="prompt-city">—</span>
+        <span class="prompt-hint" id="prompt-hint">click on the globe</span>
+      </div>
+
+      <div class="globe-wrap">
+        <svg id="globe" aria-label="Interactive globe"></svg>
+      </div>
+
+      <div class="result" id="result" hidden>
+        <div class="result-row">
+          <span class="result-score" id="result-score">0</span>
+          <span class="result-score-label">/ 100</span>
+        </div>
+        <div class="result-row">
+          <span id="result-distance">—</span>
+          <span class="muted">from</span>
+          <strong id="result-target">—</strong>
+        </div>
+        <button id="next-round" type="button">Next city</button>
+      </div>
+    </main>
+
+    <footer class="hint" id="hint">Drag to rotate the globe · scroll to zoom</footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
